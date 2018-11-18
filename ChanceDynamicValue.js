@@ -1245,6 +1245,17 @@ Chance.prototype.phone = function (options) {
   }
   var phone
   switch (options.country) {
+    case 'tw': {
+      let prefix = Array.from(new Array(80), (x, i) => '0' + (i + 910) )
+      let pools = []
+      prefix.forEach((v) => {
+        pools.push(v + self.string({pool: '0123456789', length: 6}))
+      })
+      // numPick = '0912' + self.string({pool: '0123456789', length: 6})
+      numPick = this.pick(pools)
+      phone = numPick
+      break
+    }
     case 'fr':
       if (!options.mobile) {
         numPick = this.pick([
